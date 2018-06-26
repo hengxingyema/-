@@ -1,21 +1,8 @@
 /**
  * Created by apple on 7/3/16.
  */
-var app = angular.module("myApp", []);
-
-app.directive("mynav",function(){
-    return {
-        restrict: 'E',
-        templateUrl: 'navbar.html'
-    };
-});
-
-app.directive("myfooter",function(){
-    return {
-        restrict: 'E',
-        templateUrl: 'footer.html'
-    };
-});
+var app = angular.module("productCenterApp", []);
+var navIndex = 2;
 
 app.controller('scrollController', ['$scope', '$location', '$anchorScroll',
     function ($scope, $location, $anchorScroll) {

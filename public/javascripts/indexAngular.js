@@ -1,47 +1,68 @@
 /**
- * Created by apple on 6/30/16.
+ * Created by cailong on 16/5/31.
  */
 
-var app=angular.module('indexAPP', ['angular-scroll-animate']);
-
-app.directive("mynav",function(){
+app.directive("thNav",function(){
     return {
         restrict: 'E',
-        templateUrl: 'navbar.html'
+        templateUrl: '/navbar.html'
+
+
     };
 });
 
-app.directive("myfooter",function(){
-    return {
-        restrict: 'E',
-        templateUrl: 'footer.html'
-    };
+// app.directive("thFooter",function(){
+//     return {
+//         restrict: 'E',
+//         templateUrl: '/html/footer.html',
+//         controller:function(){
+// //*****************************回到顶部****************************************
+//             var obtn = document.getElementById('btn');
+//             //获取页面可视区的高度
+//             var clientHeight=document.documentElement.clientHeight;
+//             var timer = null;
+//             var isTop = true;
+//
+//             window.onscroll=function(){
+//                 var osTop=document.documentElement.scrollTop||document.body.scrollTop;
+//                 if (osTop >= clientHeight){
+//                     obtn.style.display="block"; //显示按钮
+//                 }else {
+//                     obtn.style.display="none"; //隐藏按钮
+//                 }
+//                 if (!isTop){
+//                     clearInterval(timer);
+//                 }
+//                 isTop = false;
+//             };
+//             obtn.onclick = function(){
+//                 //设置定时器
+//                 timer = setInterval(function(){
+//                     var osTop=document.documentElement.scrollTop||document.body.scrollTop;
+//                     var ispeed = Math.floor(-osTop / 6);
+//                     //获取滚动条距离顶部的高度
+//                     document.documentElement.scrollTop=document.body.scrollTop=osTop+ispeed;
+//                     isTop = true;
+//                     if(osTop == 0){
+//                         clearInterval(timer);
+//                     }
+//                 },30);
+//             }
+//
+//         }
+//     }
+//
+// });
+
+app.controller('indexAppCtrl', function($scope, $http, $location){
+    $scope.unreadNotice = false;
+    $scope.chuxian = false;
+
+    var index = navIndex;
+    $scope.navShowIndex = index;
+    $scope.myColors = ['white', 'white', 'white', 'white','white','white','white'];
+    $scope.myColors[index] = '#3498db';
+
+
 });
 
-app.controller('scrollController', ['$scope', '$location', '$anchorScroll',
-    function ($scope, $location, $anchorScroll) {
-        $scope.goToNextWindow = function() {
-            // set the location.hash to the id of
-            // the element you wish to scroll to.
-            $location.hash('scrollerMarker');
-            // call $anchorScroll()
-            $anchorScroll();
-        };
-    }]);
-
-app.controller('scrollHide', ['$scope', function($scope, $window) {
-    $scope.showUp = true;
-    var heightOfNav = 51;
-    var height = $(window).innerHeight() - heightOfNav;
-    console.log(height);
-    //detect scroll
-    $(window).scroll(function (event) {
-        var scroll = $(window).scrollTop();
-        if(scroll> 50 || scroll==undefined){
-            $scope.showUp = false;
-        }else{
-            $scope.showUp = true;
-        }
-        $scope.$apply();
-    });
-}]);

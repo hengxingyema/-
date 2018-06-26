@@ -2,20 +2,7 @@
  * Created by apple on 7/3/16.
  */
 var app = angular.module("myApp", []);
-
-app.directive("mynav",function(){
-    return {
-        restrict: 'E',
-        templateUrl: 'navbar.html'
-    };
-});
-
-app.directive("myfooter",function(){
-    return {
-        restrict: 'E',
-        templateUrl: 'footer.html'
-    };
-});
+var navIndex = 1;
 
 app.controller('scrollHide', ['$scope', function($scope, $window) {
     $scope.showUp = true;
